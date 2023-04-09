@@ -1,4 +1,5 @@
 // import 'package:arfpaymentapp/constants/routes.dart';
+import 'dart:developer';
 import 'package:arfpaymentapp/utils/form_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -11,130 +12,157 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  static final GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
-  String _username = '';
+  final GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
+  String _membershipId = '';
   String _password = '';
+  bool hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: const Color(0xFF088E48),
       ),
       body: SingleChildScrollView(
-        child: Form(
-          key: globalFormKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 70,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF088E48),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Spacer(),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 20, bottom: 40),
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 70,
+              decoration: const BoxDecoration(
+                color: Color(0xFF088E48),
               ),
-              Transform.translate(
-                offset: const Offset(0, -30),
-                child: Container(
-                  // color: Colors.red,
-                  width: MediaQuery.of(context).size.width,
-                  // height: MediaQuery.of(context).size.height - 100,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.centerLeft,
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20, bottom: 40),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Transform.translate(
+              offset: const Offset(0, -30),
+              child: Container(
+                // color: Colors.red,
+                width: MediaQuery.of(context).size.width,
+                // height: MediaQuery.of(context).size.height - 100,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+                child: Form(
+                  key: globalFormKey,
                   child: Padding(
                     padding: const EdgeInsets.all(30.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // const Text(
-                        //   'Membership ID',
-                        //   style: TextStyle(
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
+                        const Text(
+                          'Membership ID',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 0, bottom: 0),
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: FormHelper.inputFieldWidget(
                             context,
-                            const Icon(Icons.person_3_rounded),
-                            "username",
-                            "Membership ID",
+                            'membership_id',
+                            'Membership ID',
                             (onValidateVal) {
+                              // log(onValidateVal.toString());
                               if (onValidateVal.isEmpty) {
-                                return 'Username cannot be empty.';
+                                return 'Membership ID is required';
                               }
                               return null;
                             },
-                            (onSavedVal) {},
+                            (onSavedValue) {
+                              _membershipId = onSavedValue.toString().trim();
+                            },
                           ),
                         ),
-                        // const Text(
-                        //   'Password ',
-                        //   style: TextStyle(
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
+                        const Text(
+                          'Password',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 20, bottom: 20),
+                          padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: FormHelper.inputFieldWidget(
                             context,
-                            const Icon(Icons.lock),
-                            "password",
-                            "Password",
+                            'password',
+                            'Password',
                             (onValidateVal) {
-                              if (onValidateVal.isEmpty) {
-                                return 'Password cannot be empty.';
+                              if (onValidateVal.length < 6) {
+                                return 'Password is required';
                               }
                               return null;
                             },
-                            (onSavedValue) {},
+                            (onSavedValue) {
+                              _password = onSavedValue.toString().trim();
+                            },
+                            initialValue: '',
+                            obscureText: hidePassword,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  hidePassword = !hidePassword;
+                                });
+                              },
+                              color: Colors.black54,
+                              icon: Icon(
+                                hidePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                            ),
                           ),
                         ),
-                        FormHelper.saveButton(
-                          'Login',
-                          () {
-                            if (validateAndSave()) {}
-                          },
-                          context,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: FormHelper.saveButton(
+                            'Login',
+                            () {
+                              if (validateAndSave()) {
+                                log('Membership ID : $_membershipId');
+                                log('Password  : $_password');
+                              }
+                            },
+                          ),
                         )
                       ],
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class FormHelper {
   static Widget inputFieldWidget(
     BuildContext context,
-    Icon icon,
     String keyName,
     String labelName,
     Function onValidate,
@@ -11,6 +10,7 @@ class FormHelper {
     String initialValue = "",
     obscureText = false,
     Widget? suffixIcon,
+    Widget? prefixIcon,
   }) {
     return TextFormField(
       initialValue: initialValue,
@@ -24,47 +24,51 @@ class FormHelper {
         return onSaved(val);
       },
       style: const TextStyle(fontSize: 12),
+      // decoration: const InputDecoration(
+      //   contentPadding:
+      //       EdgeInsets.only(left: 16.0, right: 16.0, top: 0, bottom: 0),
+      //   border: InputBorder.none,
+      //   hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+      //   hintText: 'John Doe ',
+      // ),
       decoration: InputDecoration(
-        // fillColor: const Color.fromARGB(1, 0, 0, 0),
-        hintStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-        hintText: labelName,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: Theme.of(context).primaryColor,
-            width: 0,
-          ),
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(
+              color: Color.fromRGBO(231, 233, 232, 1), width: 0),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: Theme.of(context).primaryColor,
+          borderRadius: BorderRadius.circular(30),
+          borderSide: const BorderSide(
+            color: Color.fromRGBO(231, 233, 232, 1),
             width: 1,
           ),
         ),
+        filled: true,
+        fillColor: const Color.fromRGBO(231, 233, 232, 1),
+        contentPadding:
+            const EdgeInsets.only(left: 16.0, right: 16.0, top: 0, bottom: 0),
+        // border: InputBorder.none,
+        hintStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        prefixIcon: prefixIcon,
+        hintText: labelName,
         suffixIcon: suffixIcon,
-        prefixIcon: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30),
-          child: IconTheme(
-            data: IconThemeData(color: Theme.of(context).primaryColor),
-            child: icon,
-          ),
-        ),
       ),
     );
   }
 
-  static Widget saveButton(
-      String buttonText, Function onTap, BuildContext context) {
+  static Widget saveButton(String buttonText, Function onClick) {
     return Column(
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            onClick();
+          },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).primaryColor,
+            // backgroundColor:
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(16),
+                Radius.circular(14),
               ),
             ),
             padding: const EdgeInsets.symmetric(vertical: 15),
@@ -80,6 +84,45 @@ class FormHelper {
           ),
         ),
       ],
+    );
+  }
+
+  static Widget submitButton(
+    String buttonText,
+    Function onTap,
+    // BuildContext context,
+  ) {
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.white,
+            style: BorderStyle.solid,
+            width: 1,
+          ),
+          color: const Color.fromRGBO(8, 142, 72, 1),
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Text(
+                buttonText,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 1,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
