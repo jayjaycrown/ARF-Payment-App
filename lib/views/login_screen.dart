@@ -93,8 +93,8 @@ class _LoginViewState extends State<LoginView> {
                             context,
                             'membership_id',
                             'Membership ID',
+                            true,
                             (onValidateVal) {
-                              // log(onValidateVal.toString());
                               if (onValidateVal.isEmpty) {
                                 return 'Membership ID is required';
                               }
@@ -118,6 +118,7 @@ class _LoginViewState extends State<LoginView> {
                             context,
                             'password',
                             'Password',
+                            true,
                             (onValidateVal) {
                               if (onValidateVal.length < 6) {
                                 return 'Password is required';

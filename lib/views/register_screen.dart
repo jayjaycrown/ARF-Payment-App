@@ -1,3 +1,5 @@
+import 'dart:developer' show log;
+
 import 'package:arfpaymentapp/utils/form_helper.dart';
 import 'package:flutter/material.dart';
 // import 'dart:ui';
@@ -12,85 +14,64 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   static final GlobalKey<FormState> globalFormKey = GlobalKey<FormState>();
-  // String branch = '';
-  // String _membership_no = '';
-  // String _password = '';
-  late final TextEditingController _branch;
-  late final TextEditingController _membershipNo;
-  late final TextEditingController _password;
-
-  @override
-  void initState() {
-    _branch = TextEditingController();
-    _membershipNo = TextEditingController();
-    _password = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _branch.dispose();
-    _membershipNo.dispose();
-    _password.dispose();
-    super.dispose();
-  }
+  String _branch = '';
+  String _membershipId = '';
+  String _password = '';
+  bool hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       key: _scaffoldKey,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: const Color(0xFF088E48),
       ),
       body: SingleChildScrollView(
-        child: Form(
-          key: globalFormKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 70,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF088E48),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Spacer(),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 20, bottom: 40),
-                      child: Text(
-                        'Register',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 70,
+              decoration: const BoxDecoration(
+                color: Color(0xFF088E48),
               ),
-              Transform.translate(
-                offset: const Offset(0, -30),
-                child: Container(
-                  // color: Colors.red,
-                  width: MediaQuery.of(context).size.width,
-                  // height: MediaQuery.of(context).size.height - 100,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(left: 20, bottom: 40),
+                    child: Text(
+                      'Register',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
+                  )
+                ],
+              ),
+            ),
+            Transform.translate(
+              offset: const Offset(0, -30),
+              child: Container(
+                // color: Colors.red,
+                width: MediaQuery.of(context).size.width,
+                // height: MediaQuery.of(context).size.height - 100,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
+                ),
+                child: Form(
+                  key: globalFormKey,
                   child: Padding(
                     padding: const EdgeInsets.all(30.0),
                     child: Column(
@@ -106,20 +87,20 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color:
-                                  Colors.grey[200], // set the background color
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // set the border radius
-                            ),
-                            child: FormHelper.inputFieldWidget(
-                              context,
-                              'branch',
-                              'Branch',
-                              () {},
-                              () {},
-                            ),
+                          child: FormHelper.inputFieldWidget(
+                            context,
+                            'branch',
+                            'Branch',
+                            true,
+                            (onValidateVal) {
+                              if (onValidateVal.isEmpty) {
+                                return 'Please select a branch';
+                              }
+                              return null;
+                            },
+                            (onSavedValue) {
+                              _branch = onSavedValue.toString().trim();
+                            },
                           ),
                         ),
                         const Text(
@@ -131,20 +112,20 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color:
-                                  Colors.grey[200], // set the background color
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // set the border radius
-                            ),
-                            child: FormHelper.inputFieldWidget(
-                              context,
-                              'membershipNumber',
-                              'Membership Number',
-                              () {},
-                              () {},
-                            ),
+                          child: FormHelper.inputFieldWidget(
+                            context,
+                            'membershipNumber',
+                            'Membership Number',
+                            true,
+                            (onValidateVal) {
+                              if (onValidateVal.isEmpty) {
+                                return 'Please enter your Membership number';
+                              }
+                              return null;
+                            },
+                            (onSavedValue) {
+                              _membershipId = onSavedValue.toString().trim();
+                            },
                           ),
                         ),
                         Text.rich(
@@ -170,20 +151,21 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color:
-                                  Colors.grey[200], // set the background color
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // set the border radius
-                            ),
-                            child: FormHelper.inputFieldWidget(
-                              context,
-                              'name',
-                              'John Doe',
-                              () {},
-                              () {},
-                            ),
+                          child: FormHelper.inputFieldWidget(
+                            context,
+                            initialValue: 'Hello World',
+                            'name',
+                            'John Doe',
+                            false,
+                            (onValidateVal) {
+                              if (onValidateVal.isEmpty) {
+                                return 'Name cannot be empty';
+                              }
+                              return null;
+                            },
+                            (onSavedValue) {
+                              // _password = onSavedValue.toString().trim();
+                            },
                           ),
                         ),
                         const Text(
@@ -195,28 +177,50 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color:
-                                  Colors.grey[200], // set the background color
-                              borderRadius: BorderRadius.circular(
-                                  10.0), // set the border radius
-                            ),
-                            child: FormHelper.inputFieldWidget(
-                              context,
-                              'password',
-                              'Password',
-                              () {},
-                              () {},
+                          child: FormHelper.inputFieldWidget(
+                            context,
+                            'password',
+                            'Password',
+                            true,
+                            (onValidateVal) {
+                              if (onValidateVal.isEmpty) {
+                                return 'Password is required';
+                              }
+                              if (onValidateVal.length < 6) {
+                                return 'Password cannot be less than 6 characters';
+                              }
+                              return null;
+                            },
+                            (onSavedValue) {
+                              _password = onSavedValue.toString().trim();
+                            },
+                            initialValue: '',
+                            obscureText: hidePassword,
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  hidePassword = !hidePassword;
+                                });
+                              },
+                              color: Colors.black45,
+                              icon: Icon(
+                                hidePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
+                          padding: const EdgeInsets.only(top: 20.0),
                           child: FormHelper.saveButton(
                             'Register',
                             () {
-                              if (validateAndSave()) {}
+                              if (validateAndSave()) {
+                                log('Branch  : $_branch');
+                                log('Membership Number : $_membershipId');
+                                log('Password  : $_password');
+                              }
                             },
                           ),
                         )
@@ -224,9 +228,9 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );

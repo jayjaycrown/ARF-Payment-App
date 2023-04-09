@@ -5,6 +5,7 @@ class FormHelper {
     BuildContext context,
     String keyName,
     String labelName,
+    bool isEnabled,
     Function onValidate,
     Function onSaved, {
     String initialValue = "",
@@ -31,6 +32,7 @@ class FormHelper {
       //   hintStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
       //   hintText: 'John Doe ',
       // ),
+      enabled: isEnabled,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
