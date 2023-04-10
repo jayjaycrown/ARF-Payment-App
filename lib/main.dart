@@ -1,5 +1,6 @@
 import 'package:arfpaymentapp/constants/routes.dart';
 import 'package:arfpaymentapp/views/login_screen.dart';
+import 'package:arfpaymentapp/views/reg_success.dart';
 import 'package:arfpaymentapp/views/register_screen.dart';
 import 'package:arfpaymentapp/views/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -40,12 +41,12 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         primarySwatch: myCustomColor,
         primaryColor: const Color(0xFF088E48),
-        // cardColor: const Color.fromARGB(157, 255, 0, 0),
       ),
       home: const WelcomeScreen(),
       routes: {
         loginRoute: (context) => const LoginView(),
         registerRoute: (context) => const RegisterView(),
+        successRoute: (context) => const SuccessView(),
       },
     );
   }

@@ -1,5 +1,6 @@
 // import 'package:arfpaymentapp/constants/routes.dart';
 import 'dart:developer';
+import 'package:arfpaymentapp/constants/routes.dart';
 import 'package:arfpaymentapp/utils/form_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -83,12 +84,12 @@ class _LoginViewState extends State<LoginView> {
                         const Text(
                           'Membership ID',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          padding: const EdgeInsets.only(top: 10, bottom: 30),
                           child: FormHelper.inputFieldWidget(
                             context,
                             'membership_id',
@@ -108,7 +109,7 @@ class _LoginViewState extends State<LoginView> {
                         const Text(
                           'Password',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -145,17 +146,37 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20.0),
-                          child: FormHelper.saveButton(
-                            'Login',
-                            () {
-                              if (validateAndSave()) {
-                                log('Membership ID : $_membershipId');
-                                log('Password  : $_password');
-                              }
+                        TextButton(
+                            style: TextButton.styleFrom(
+                                foregroundColor: Colors.red),
+                            onPressed: () {
+                              // Navigator.of(context).pushNamed(
+                              //   loginRoute,
+                              // );
                             },
-                          ),
+                            child: const Text('Forgot your password?')),
+                        FormHelper.saveButton(
+                          'Login',
+                          () {
+                            if (validateAndSave()) {
+                              log('Membership ID : $_membershipId');
+                              log('Password  : $_password');
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                successRoute,
+                                (route) => false,
+                              );
+                            }
+                          },
+                        ),
+                        Center(
+                          child: TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                  registerRoute,
+                                );
+                              },
+                              child: const Text(
+                                  'New user?, Click here to register')),
                         )
                       ],
                     ),

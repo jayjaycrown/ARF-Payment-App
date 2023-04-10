@@ -1,5 +1,5 @@
 import 'dart:developer' show log;
-
+import 'package:arfpaymentapp/constants/routes.dart';
 import 'package:arfpaymentapp/utils/form_helper.dart';
 import 'package:flutter/material.dart';
 // import 'dart:ui';
@@ -81,12 +81,12 @@ class _RegisterViewState extends State<RegisterView> {
                         const Text(
                           'Branch',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          padding: const EdgeInsets.only(top: 10, bottom: 30),
                           child: FormHelper.inputFieldWidget(
                             context,
                             'branch',
@@ -106,12 +106,12 @@ class _RegisterViewState extends State<RegisterView> {
                         const Text(
                           'Membership Number',
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
+                          padding: const EdgeInsets.only(top: 10, bottom: 30),
                           child: FormHelper.inputFieldWidget(
                             context,
                             'membershipNumber',
@@ -220,9 +220,23 @@ class _RegisterViewState extends State<RegisterView> {
                                 log('Branch  : $_branch');
                                 log('Membership Number : $_membershipId');
                                 log('Password  : $_password');
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                  successRoute,
+                                  (route) => false,
+                                );
                               }
                             },
                           ),
+                        ),
+                        Center(
+                          child: TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                  loginRoute,
+                                );
+                              },
+                              child: const Text(
+                                  'Already have an account?, Login here')),
                         )
                       ],
                     ),

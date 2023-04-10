@@ -24,7 +24,7 @@ class FormHelper {
         // ignore: void_checks
         return onSaved(val);
       },
-      style: const TextStyle(fontSize: 12),
+      style: const TextStyle(fontSize: 14),
       // decoration: const InputDecoration(
       //   contentPadding:
       //       EdgeInsets.only(left: 16.0, right: 16.0, top: 0, bottom: 0),
@@ -35,12 +35,12 @@ class FormHelper {
       enabled: isEnabled,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
               color: Color.fromRGBO(231, 233, 232, 1), width: 0),
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
             color: Color.fromRGBO(231, 233, 232, 1),
             width: 1,

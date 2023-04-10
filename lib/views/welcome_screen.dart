@@ -1,7 +1,5 @@
 import 'package:arfpaymentapp/constants/routes.dart';
 import 'package:arfpaymentapp/views/login_screen.dart';
-// import 'package:arfpaymentapp/views/login_screen.dart';
-// import 'package:arfpaymentapp/views/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
