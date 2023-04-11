@@ -51,7 +51,7 @@ class _SuccessViewState extends State<SuccessView> {
                 padding: const EdgeInsets.all(16.0),
                 child: SizedBox(
                   width: double.infinity,
-                  height: 80,
+                  height: 60,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromRGBO(8, 142, 72, 1),

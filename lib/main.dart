@@ -1,9 +1,13 @@
 import 'package:arfpaymentapp/constants/routes.dart';
+import 'package:arfpaymentapp/views/tabs_view.dart';
 import 'package:arfpaymentapp/views/login_screen.dart';
 import 'package:arfpaymentapp/views/reg_success.dart';
 import 'package:arfpaymentapp/views/register_screen.dart';
+import 'package:arfpaymentapp/views/settings_screen.dart';
+import 'package:arfpaymentapp/views/transaction_screen.dart';
 import 'package:arfpaymentapp/views/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:arfpaymentapp/views/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,6 +51,16 @@ class _MyAppState extends State<MyApp> {
         loginRoute: (context) => const LoginView(),
         registerRoute: (context) => const RegisterView(),
         successRoute: (context) => const SuccessView(),
+        home: (context) => const MyTabPage(),
+        dashBoardRoute: (context) => const DashBoardView(
+              title: '',
+            ),
+        transactionRoute: (context) => const TransactionsView(
+              title: '',
+            ),
+        settingsRoute: (context) => const SettingsView(
+              title: '',
+            ),
       },
     );
   }

@@ -1,5 +1,9 @@
 const loginRoute = '/login/';
 const registerRoute = '/register/';
 const successRoute = '/success/';
+const home = '/home/';
+const dashBoardRoute = '/dashboard/';
+const transactionRoute = '/transactions/';
+const settingsRoute = '/settings/';
 // const notesRoute = '/notes/';
 // const verifyEmailRoute = '/verify-email/';

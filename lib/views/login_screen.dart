@@ -162,7 +162,7 @@ class _LoginViewState extends State<LoginView> {
                               log('Membership ID : $_membershipId');
                               log('Password  : $_password');
                               Navigator.of(context).pushNamedAndRemoveUntil(
-                                successRoute,
+                                home,
                                 (route) => false,
                               );
                             }
