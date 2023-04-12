@@ -1,4 +1,5 @@
 import 'package:arfpaymentapp/constants/routes.dart';
+// import 'package:arfpaymentapp/views/receipt_screen.dart';
 import 'package:arfpaymentapp/views/tabs_view.dart';
 import 'package:arfpaymentapp/views/login_screen.dart';
 import 'package:arfpaymentapp/views/reg_success.dart';
@@ -61,6 +62,9 @@ class _MyAppState extends State<MyApp> {
         settingsRoute: (context) => const SettingsView(
               title: '',
             ),
+        // receiptRoute: (context) => const ReceiptView(
+        //       tnx: '',
+        //     ),
       },
     );
   }

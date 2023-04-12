@@ -5,5 +5,6 @@ const home = '/home/';
 const dashBoardRoute = '/dashboard/';
 const transactionRoute = '/transactions/';
 const settingsRoute = '/settings/';
+const receiptRoute = '/receipt/';
 // const notesRoute = '/notes/';
 // const verifyEmailRoute = '/verify-email/';
