@@ -147,14 +147,15 @@ class _LoginViewState extends State<LoginView> {
                           ),
                         ),
                         TextButton(
-                            style: TextButton.styleFrom(
-                                foregroundColor: Colors.red),
-                            onPressed: () {
-                              // Navigator.of(context).pushNamed(
-                              //   loginRoute,
-                              // );
-                            },
-                            child: const Text('Forgot your password?')),
+                          style:
+                              TextButton.styleFrom(foregroundColor: Colors.red),
+                          onPressed: () {
+                            // Navigator.of(context).pushNamed(
+                            //   loginRoute,
+                            // );
+                          },
+                          child: const Text('Forgot your password?'),
+                        ),
                         FormHelper.saveButton(
                           'Login',
                           () {

@@ -1,4 +1,7 @@
 import 'package:arfpaymentapp/constants/routes.dart';
+import 'package:arfpaymentapp/views/fund_wallet/card_fund_screen.dart';
+import 'package:arfpaymentapp/views/fund_wallet/overview_screen.dart';
+import 'package:arfpaymentapp/views/fund_wallet/transfer_fund_screen.dart';
 // import 'package:arfpaymentapp/views/receipt_screen.dart';
 import 'package:arfpaymentapp/views/tabs_view.dart';
 import 'package:arfpaymentapp/views/login_screen.dart';
@@ -62,6 +65,9 @@ class _MyAppState extends State<MyApp> {
         settingsRoute: (context) => const SettingsView(
               title: '',
             ),
+        walletOverviewRoute: (context) => const FundWalletView(),
+        cardFundRoute: (context) => const CardFundView(),
+        transferFundRoute: (context) => const TransferFundView()
         // receiptRoute: (context) => const ReceiptView(
         //       tnx: '',
         //     ),

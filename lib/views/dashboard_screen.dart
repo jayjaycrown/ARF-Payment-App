@@ -146,7 +146,9 @@ class _DashBoardViewState extends State<DashBoardView> {
                           alignment: Alignment.centerLeft,
                           child: GestureDetector(
                             onTap: () {
-                              log('Fund Wallet');
+                              Navigator.of(context)
+                                  .pushNamed(walletOverviewRoute);
+                              // log('Fund Wallet');
                             },
                             child: SizedBox(
                               height: 100,
