@@ -7,6 +7,7 @@ import 'dart:typed_data';
 import 'package:arfpaymentapp/views/transaction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 // import 'package:path_provider/path_provider.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
@@ -308,6 +309,27 @@ class _ReceiptViewState extends State<ReceiptView> {
     );
   }
 
+  void _copyToClipboard(BuildContext context) {
+    Clipboard.setData(const ClipboardData()).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Align(
+            alignment: Alignment.center,
+            child: Text(
+              'Saved to gallery!',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+        ),
+      );
+    });
+  }
+
   _saveScreen() async {
     RenderRepaintBoundary boundary =
         _globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
@@ -318,6 +340,8 @@ class _ReceiptViewState extends State<ReceiptView> {
       final result =
           await ImageGallerySaver.saveImage(byteData.buffer.asUint8List());
       log(result.toString());
+      // ignore: use_build_context_synchronously
+      _copyToClipboard(context);
     }
   }
 }

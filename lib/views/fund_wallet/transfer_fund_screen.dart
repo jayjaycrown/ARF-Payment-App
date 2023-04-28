@@ -182,63 +182,63 @@ class _TransferFundViewState extends State<TransferFundView> {
               ),
             ),
 
-            const Spacer(),
-            // Padding()
-            ElevatedButton(
-              onPressed: () async {
-                // screenshotController
-                //     .capture(delay: const Duration(milliseconds: 10))
-                //     .then(
-                //   (capturedImage) async {
-                //     showCapturedWidget(context, capturedImage!);
-                //   },
-                // ).catchError((onError) {
-                //   String textToCopy = onError;
-                //   _copyToClipboard(context, textToCopy);
-                // });
-                // double pixelRatio = MediaQuery.of(context).devicePixelRatio;
+            // const Spacer(),
+            // // Padding()
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     // screenshotController
+            //     //     .capture(delay: const Duration(milliseconds: 10))
+            //     //     .then(
+            //     //   (capturedImage) async {
+            //     //     showCapturedWidget(context, capturedImage!);
+            //     //   },
+            //     // ).catchError((onError) {
+            //     //   String textToCopy = onError;
+            //     //   _copyToClipboard(context, textToCopy);
+            //     // });
+            //     // double pixelRatio = MediaQuery.of(context).devicePixelRatio;
 
-                await screenshotController
-                    .capture(
-                        // pixelRatio: pixelRatio,
-                        delay: const Duration(milliseconds: 10))
-                    .then((image) async {
-                  // _saved(image as File);
-                  final result = await ImageGallerySaver.saveImage(image!);
-                  String textToCopy = "File Saved to Gallery";
-                  // _copyToClipboard(context, textToCopy);
-                  log(textToCopy);
-                  final directory = await getApplicationDocumentsDirectory();
-                  final imagePath =
-                      await File('${directory.path}/screenshot.png').create();
-                  await imagePath.writeAsBytes(image);
-                  // ignore: use_build_context_synchronously
-                  _copyToClipboard(context, textToCopy);
-                }).catchError((onError) {
-                  String textToCopy = onError.toString();
-                  log(textToCopy);
-                  _copyToClipboard(context, textToCopy);
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                // backgroundColor:
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(14),
-                  ),
-                ),
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                minimumSize: const Size(double.infinity, 0),
-              ),
-              child: const Text(
-                'Screenshot',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  letterSpacing: 1,
-                ),
-              ),
-            ),
+            //     await screenshotController
+            //         .capture(
+            //             // pixelRatio: pixelRatio,
+            //             delay: const Duration(milliseconds: 10))
+            //         .then((image) async {
+            //       // _saved(image as File);
+            //       final result = await ImageGallerySaver.saveImage(image!);
+            //       String textToCopy = "File Saved to Gallery";
+            //       // _copyToClipboard(context, textToCopy);
+            //       log(textToCopy);
+            //       final directory = await getApplicationDocumentsDirectory();
+            //       final imagePath =
+            //           await File('${directory.path}/screenshot.png').create();
+            //       await imagePath.writeAsBytes(image);
+            //       // ignore: use_build_context_synchronously
+            //       _copyToClipboard(context, textToCopy);
+            //     }).catchError((onError) {
+            //       String textToCopy = onError.toString();
+            //       log(textToCopy);
+            //       _copyToClipboard(context, textToCopy);
+            //     });
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //     // backgroundColor:
+            //     shape: const RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.all(
+            //         Radius.circular(14),
+            //       ),
+            //     ),
+            //     padding: const EdgeInsets.symmetric(vertical: 15),
+            //     minimumSize: const Size(double.infinity, 0),
+            //   ),
+            //   child: const Text(
+            //     'Screenshot',
+            //     style: TextStyle(
+            //       fontWeight: FontWeight.bold,
+            //       fontSize: 18,
+            //       letterSpacing: 1,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
